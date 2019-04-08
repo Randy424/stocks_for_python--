@@ -66,7 +66,7 @@ class Fetcher:
         headers = ["symbol","latestPrice","latestVolume","close","open","low","high"]
         #most recent ticker time is stored in dictionary for faster checking
         if ticker in self.last_ticker_values:
-            if self.last_ticker_values[ticker] == get_time():
+            if self.last_ticker_values[ticker] == self.get_time():
                 return
 
         #Grabs stock information for a ticker and adds it to the dataframe
