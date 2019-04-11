@@ -3,7 +3,26 @@ import argparse
 import sqlite3
 
 class Query:
+    """
+    This class searches for a specified ticker/time combination and returns
+    all associated data
+    """
     def __init__(self, time, db, ticker):
+        """
+        Creates the variables needed for this class
+
+        :type time: string
+        :param time: the time to search for
+
+        :type db: sqlite3.connect
+        :param db: establishes a connectino to the database file
+
+        :type db_name: string
+        :param db_name: the database file to access
+
+        :type ticker: string
+        :param ticker: the ticker to search for
+        """
         self.time = time
         self.db = sqlite3.connect(db)
         self.db_name = db
@@ -11,13 +30,12 @@ class Query:
 
     def find_symbol(self):
         """
-        Indexes into the dictionary based on the symbols name stored in sys.argv[3]
-        Searches the rows associated with the symbol to find the time specified
-        If verbose is set to true, output the number of rows, columns, and all the
-        field names
+        Runs the select function within the database to quickly find
+        the ticker/time combination
+        Prints out the associated values
         """
         selector = self.db.cursor()
-        selector.execute("SELECT * FROM tickers WHERE Ticker ="
+        selector.execute("SELECT * FROM StockData WHERE Ticker ="
                         +"'"+self.ticker+"'"+
                         " AND Time ="+"'"+self.time+"'")
         labels = list(map(lambda x: x[0], selector.description))

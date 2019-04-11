@@ -8,10 +8,21 @@ from iex import Stock
 import os
 import sys
 
-#sys.argv[2] = file name
-
 class Tickers:
+    """
+    This class grabs n amount of tickers using the iex Stock function
+    """
     def __init__(self,ticker_count,output_file="tickers.txt"):
+        """
+        Creates the variables needed for the class
+
+        :type ticker_count: int
+        :param ticker_count: the amount of tickers to grab
+
+        :type output_file: string
+        :param output_file: destination to store tickers in.
+                            Defaults as tickers.txt
+        """
         self.n = ticker_count
         self.output_file = output_file
 
@@ -49,7 +60,10 @@ class Tickers:
        Parses html from request.get() output
        returns list of 'n' many tickers. Returns
        an empty list if the requested number of tickers
-       is greater than 150
+       is greater than 110
+
+       :type html: string
+       :param html: the html address to go to for the nasdaq
        """
        ticker_list = []
        #if n > limit, returns empty list
@@ -90,6 +104,8 @@ class Tickers:
        """
        Uses iex.Stock().price to check if a ticker has a listed price
 
+       :type t: string
+       :param t: a ticker symbol
        """
        try:
           #blocking std output from Stock().price()

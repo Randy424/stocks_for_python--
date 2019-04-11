@@ -8,6 +8,10 @@ import time
 from iex import Stock
 
 class Fetcher:
+    """
+    This class updates stock information for n amount of seconds and stores
+    data in a db file
+    """
     def __init__(self,time_limit,db):
         self.last_ticker_values = {}
         self.time_lim = time_limit
@@ -25,17 +29,16 @@ class Fetcher:
 
         """
         c = self.db.cursor()
-        if (os.path.isfile(self.db_name) == False):
-            c.execute("""CREATE TABLE tickers (
-                    Time text,
-                    Ticker text,
-                    LatestPrice text,
-                    LatestVolume text,
-                    Close text,
-                    Open text,
-                    Low text,
-                    High text
-                    )""")
+        c.execute("""CREATE TABLE IF NOT EXISTS StockData (
+                Time text,
+                Ticker text,
+                LatestPrice text,
+                LatestVolume text,
+                Close text,
+                Open text,
+                Low text,
+                High text
+                )""")
         t_end = time.time() + self.time_lim
         while time.time() < t_end:
             iter_start = datetime.datetime.now()
@@ -76,7 +79,7 @@ class Fetcher:
         for header in headers:
             values.append("'"+str(book[header])+"'")
         values = ",".join(values)
-        command ="INSERT INTO tickers VALUES (" + values + ")"
+        command ="INSERT INTO StockData VALUES (" + values + ")"
         connection.execute(command)
 
         #updates ticker value in its dictionary

@@ -1,6 +1,8 @@
 import sys
 import argparse
-
+from tickers import Tickers
+from fetcher import Fetcher
+from query import Query
 """
 Should have a main module that takes the following flags:
 ∗ operation: Values are: ’Fetcher’, ’Ticker’, or ’Query’ Based on the value of 
@@ -60,5 +62,18 @@ def parse_args(args):
 
 if __name__ == "__main__":
     args = parse_args(sys.argv[1:])
-    print(args.ticker)
-    pass
+    d = vars(args)
+    if d["operation"]=="Ticker" and d["ticker_count"]!=None:
+         tickers = Tickers(int(d["ticker_count"]))
+         tickers.save_tickers()
+         
+    elif d["operation"]=="Fetcher" and d["time_limit"]!=None and d["db"]!=None:
+         fetcher = Fetcher(int(d["time_limit"]),d["db"])
+         fetcher.fetch_all_data()
+
+    elif d["operation"]=="Query" and d["time"]!=None and d["db"]!=None and d["ticker"]!=None:
+        query = Query(d["time"],d["db"],d["ticker"])
+        query.find_symbol()
+
+    else:
+        print("What you entered was not valid")
