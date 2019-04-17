@@ -6,10 +6,8 @@ from stock import Fetcher
 
 def test_fetcher():
     """
-    Test function for query.find_symbol()
-
-    Will assume that we have a database ”stocks.db” 
-    that has data for the ’YI’ ticker at time '16:32'
+    Test function for Fetcher.fetch_all_data()
+    Will check to see that fetch_all_data is returning True
     """
     fetch = Fetcher(10,"stocks.db")
-    fetch.fetch_all_data()
+    assert fetch.fetch_all_data()

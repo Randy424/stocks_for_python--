@@ -1,4 +1,4 @@
-Classes
+test_fetcher
 ----------------------------
-.. automodule:: stock
+.. automodule:: test_fetcher
    :members:

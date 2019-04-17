@@ -1,4 +1,4 @@
-Classes
+test_tickers
 ----------------------------
-.. automodule:: stock
+.. automodule:: test_tickers
    :members:

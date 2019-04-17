@@ -152,7 +152,7 @@ class Fetcher:
     def fetch_all_data(self):
         """
         Loads tickers from tickers.txt
-        if info.csv does not already exist it is created with header
+        into sqlLite database
         Calls updater over span of time_lim
 
         args:
@@ -163,12 +163,12 @@ class Fetcher:
         c.execute("""CREATE TABLE IF NOT EXISTS StockData (
                 Time text,
                 Ticker text,
-                Price text,
-                Volume text,
-                Close text,
-                Open text,
                 Low text,
-                High text
+                High text,
+                Open text,
+                Close text,
+                Price text,
+                Volume text
                 )""")
         t_end = time.time() + self.time_lim
         while time.time() < t_end:
@@ -186,18 +186,19 @@ class Fetcher:
                 time.sleep(60-now.second)
         self.db.commit()
         self.db.close()
+        return True
 
     def write_update(self,ticker,connection):
         """
-        Is called from gettickers_callupdate()
+        Is called from fetch_all_data()
         Gets current stock quote using ticker (ticker symbol as string)
         if ticker exists in pdf, updates ticker, if not, it appends current quote
-        data is saved via overwriting previous info.csv 
+        
 
         args: ticker - string
 
         """
-        headers = ["symbol","Price","Volume","close","open","low","high"]
+        headers = ["symbol","latestPrice","latestVolume","close","open","low","high"]
         #most recent ticker time is stored in dictionary for faster checking
         if ticker in self.last_ticker_values:
             if self.last_ticker_values[ticker] == self.get_time():

@@ -21,6 +21,9 @@ Requirements:
    
    tutorial
    classes
+   test_fetcher
+   test_tickers
+   test_query
    
 Indices and tables
 ==================

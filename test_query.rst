@@ -1,4 +1,4 @@
-Classes
+test_query
 ----------------------------
-.. automodule:: stock
+.. automodule:: test_query
    :members:
