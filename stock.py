@@ -252,7 +252,7 @@ class Query:
         :param ticker: the ticker to search for
         """
         self.time = time
-        selfg = sqlite3.connect(db)
+        self.db = sqlite3.connect(db)
         self.db_name = db
         self.ticker = ticker
 
