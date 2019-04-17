@@ -11,5 +11,5 @@ def test_fetcher():
     Will assume that we have a database ”stocks.db” 
     that has data for the ’YI’ ticker at time '16:32'
     """
-    fetch = Fetcher(10,"test.db")
+    fetch = Fetcher(10,"stocks.db")
     fetch.fetch_all_data()
