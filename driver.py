@@ -1,8 +1,8 @@
 import sys
 import argparse
-from tickers import Tickers
-from fetcher import Fetcher
-from query import Query
+from stock import Fetcher
+from stock import Query
+from stock import Tickers
 """
 Should have a main module that takes the following flags:
 ∗ operation: Values are: ’Fetcher’, ’Ticker’, or ’Query’ Based on the value of 
@@ -54,8 +54,6 @@ def parse_args(args):
         "for which to print data")
     parser.add_argument("--db", nargs='?', default=None, type=str, 
         help="parameter to specify the database file to be used.")
-    parser.add_argument("--cov", nargs='?', default=None, type=str, 
-        help="for testing modules")
 
     args = parser.parse_args(args)
     return args    

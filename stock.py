@@ -163,8 +163,8 @@ class Fetcher:
         c.execute("""CREATE TABLE IF NOT EXISTS StockData (
                 Time text,
                 Ticker text,
-                LatestPrice text,
-                LatestVolume text,
+                Price text,
+                Volume text,
                 Close text,
                 Open text,
                 Low text,
@@ -197,7 +197,7 @@ class Fetcher:
         args: ticker - string
 
         """
-        headers = ["symbol","latestPrice","latestVolume","close","open","low","high"]
+        headers = ["symbol","Price","Volume","close","open","low","high"]
         #most recent ticker time is stored in dictionary for faster checking
         if ticker in self.last_ticker_values:
             if self.last_ticker_values[ticker] == self.get_time():
@@ -252,7 +252,7 @@ class Query:
         :param ticker: the ticker to search for
         """
         self.time = time
-        self.db = sqlite3.connect(db)
+        selfg = sqlite3.connect(db)
         self.db_name = db
         self.ticker = ticker
 
